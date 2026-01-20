@@ -1,6 +1,6 @@
 .footer {
-    background: linear-gradient(180deg, #2e0909 0%, #5c1212 100%);
-    /* Dark maroon to maroon gradient */
+    background-color: var(--color-brown-dark);
+    /* Brown matching CTA */
     color: #fff;
     padding: 5rem 0 2rem;
     font-family: var(--font-sans, sans-serif);
