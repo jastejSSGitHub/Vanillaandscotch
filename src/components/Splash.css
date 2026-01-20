@@ -1,0 +1,127 @@
+.splash-container {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-brown-dark);
+    /* Fallback color */
+    color: var(--color-white);
+    overflow: hidden;
+}
+
+.splash-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    opacity: 0;
+    /* transition: opacity 0.2s ease-out; Removed for hard cut/crop effect */
+}
+
+.splash-video-bg.active {
+    opacity: 0.6;
+}
+
+/* Fallback gradient/animation if video fails or is loading */
+.splash-overlay {
+    position: absolute;
+    inset: 0;
+    /* background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%); */
+    background: transparent;
+    z-index: -1;
+    backdrop-filter: blur(0px);
+    /* Removed blur to not obstruct video details */
+}
+
+.splash-content {
+    text-align: center;
+    z-index: 10;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.splash-logo {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.3s;
+}
+
+.splash-subtext {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    /* Bigger */
+    font-weight: 600;
+    /* Bolder */
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    max-width: 800px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.6s;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    /* Ensure readability against video */
+}
+
+.splash-cta {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-white);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 1rem 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.9s;
+    position: relative;
+    overflow: hidden;
+}
+
+.splash-cta:hover {
+    background-color: var(--color-white);
+    color: var(--color-brown-dark);
+    border-color: var(--color-white);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .splash-logo {
+        font-size: 3rem;
+    }
+
+    .splash-subtext {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,197 @@
+.testimonials-section {
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #fff5f7 0%, #ffe4e8 100%);
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(216, 27, 96, 0.1);
+}
+
+/* Decorative background elements */
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 179, 198, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.testimonials-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.testimonials-title {
+    text-align: center;
+    font-family: var(--font-serif, "Cormorant Garamond", serif);
+    font-size: 3.5rem;
+    margin-bottom: 3.5rem;
+    color: #1a1a1a;
+    /* Updated to match other sections */
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+}
+
+/* Removed underline (::after) from title */
+
+.marquee-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Reduced spacing between rows */
+    position: relative;
+    z-index: 1;
+}
+
+.marquee-row {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 1rem 0;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 2rem;
+    min-width: 100%;
+}
+
+/* Scroll Animations */
+.scroll-left .marquee-content {
+    animation: scrollLeft 60s linear infinite;
+}
+
+.scroll-right .marquee-content {
+    animation: scrollRight 60s linear infinite;
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Card Styling */
+.review-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 32px;
+    box-shadow: 0 15px 35px rgba(136, 14, 79, 0.08);
+    min-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 182, 193, 0.4);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+}
+
+/* Quotation mark on top right */
+.review-card::after {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 5rem;
+    font-family: var(--font-serif, serif);
+    color: rgba(216, 27, 96, 0.08);
+    z-index: 0;
+    line-height: 1;
+}
+
+.review-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(136, 14, 79, 0.15);
+    border-color: #d81b60;
+    background: #ffffff;
+}
+
+.review-card p {
+    font-family: var(--font-serif, "Cormorant Garamond", serif);
+    font-size: 1.4rem;
+    color: #4a0720;
+    line-height: 1.6;
+    margin: 1.5rem 0 2rem;
+    font-style: italic;
+    white-space: normal;
+    position: relative;
+    z-index: 1;
+}
+
+.review-card .author-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(216, 27, 96, 0.15);
+    padding-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.review-card .stars {
+    color: #ffb3c6;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.review-card span {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.9rem;
+    color: #d81b60;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* Hover Pause Effect */
+.marquee-row:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+    .testimonials-title {
+        font-size: 2.8rem;
+    }
+
+    .review-card {
+        min-width: 320px;
+        padding: 2rem;
+    }
+
+    .review-card::after {
+        font-size: 3rem;
+        right: 20px;
+    }
+}

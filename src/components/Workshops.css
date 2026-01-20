@@ -1,0 +1,121 @@
+.workshops-section {
+    padding: 5rem 0;
+    background-color: #fff;
+}
+
+.workshops-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.section-label {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent, #C9A586);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.workshops-title {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+    color: var(--color-text);
+}
+
+.workshops-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.workshops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.workshop-card {
+    cursor: pointer;
+}
+
+.workshop-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.workshop-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.workshop-card:hover .workshop-image {
+    transform: scale(1.05);
+}
+
+.workshop-level {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--color-text);
+    border-radius: 50px;
+}
+
+.workshop-date {
+    display: block;
+    font-family: var(--font-sans);
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.workshop-name {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-text);
+}
+
+.btn-link {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--color-text);
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+}
+
+.workshop-card:hover .btn-link {
+    border-color: var(--color-text);
+}
+
+/* Response */
+@media (max-width: 768px) {
+    .workshops-title {
+        font-size: 2.5rem;
+    }
+}
