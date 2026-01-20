@@ -52,14 +52,15 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (product) => {
+    const quantityToAdd = product.quantity || 1;
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === product.id);
       if (existingItem) {
         return prevCart.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, quantity: item.quantity + quantityToAdd } : item
         );
       }
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...product, quantity: quantityToAdd }];
     });
     // Open cart drawer when item is added
     setIsCartOpen(true);
@@ -116,6 +117,7 @@ function App() {
               <Route path="/cart" element={
                 <CartPage
                   cart={cart}
+                  addToCart={addToCart}
                   updateQuantity={updateQuantity}
                   removeFromCart={removeFromCart}
                 />

@@ -1,0 +1,424 @@
+.search-overlay-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 80px;
+}
+
+.search-overlay-content {
+    width: 90%;
+    max-width: 600px;
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.search-icon-large {
+    font-size: 20px;
+    color: #999;
+    margin-right: 12px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    font-size: 1.1rem;
+    outline: none;
+    font-family: inherit;
+    color: #333;
+    font-weight: 500;
+}
+
+.search-input::placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+.close-search-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.close-search-btn:hover {
+    background: #f5f5f5;
+}
+
+.search-results-container {
+    overflow-y: auto;
+    flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: #eee transparent;
+    padding-right: 4px;
+}
+
+.search-results-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.search-results-container::-webkit-scrollbar-thumb {
+    background-color: #eee;
+    border-radius: 20px;
+}
+
+/* Empty State */
+.search-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+    animation: fadeIn 0.4s ease;
+}
+
+.empty-illustration-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-state-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Removed drop-shadow as requested */
+    transition: transform 0.3s ease;
+    filter: brightness(1.05) contrast(1.1);
+    /* Subtle pop for flat look */
+}
+
+.empty-illustration-container:hover .empty-state-img {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+.search-icon-badge {
+    position: absolute;
+    bottom: 5px;
+    /* Moved closer to plate */
+    right: 15px;
+    /* Moved closer to plate */
+    width: 28px;
+    height: 28px;
+    background: var(--color-brown-dark, #5a4a42);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 2px solid white;
+}
+
+.search-empty-state h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.search-empty-state p {
+    margin: 0 0 24px 0;
+    font-size: 0.9rem;
+    color: #888;
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+.search-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-tags span {
+    background: #f5f5f5;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.search-tags span:hover {
+    background: var(--color-accent, #c68e17);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* SMART CATEGORY BANNER */
+.smart-category-banner {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    animation: fadeIn 0.4s ease;
+}
+
+.smart-banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, #fafafa 100%);
+}
+
+.smart-text {
+    flex: 1;
+    z-index: 2;
+}
+
+.smart-text h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.25rem;
+    color: #333;
+    font-family: var(--font-serif, serif);
+}
+
+.smart-text p {
+    margin: 0 0 16px 0;
+    font-size: 0.9rem;
+    color: #666;
+    max-width: 220px;
+    line-height: 1.4;
+}
+
+.smart-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-smart-shop {
+    background-color: var(--color-brown-dark, #5a4a42);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-smart-shop:hover {
+    background-color: #3d2f28;
+    transform: translateY(-1px);
+}
+
+.btn-smart-link {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.btn-smart-link:hover {
+    border-color: #bbb;
+    background: #fff;
+    color: #333;
+}
+
+.smart-image-wrapper {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.smart-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 40px 0;
+    color: #888;
+    font-style: italic;
+}
+
+/* Results Grid */
+.results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-result-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.search-result-card:hover {
+    background: #fafafa;
+    border-color: #eee;
+    transform: translateY(-1px);
+}
+
+.result-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 16px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+}
+
+.result-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.result-info {
+    flex: 1;
+}
+
+.result-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.result-subtitle {
+    margin: 0 0 4px 0;
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.result-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-price {
+    font-weight: 700;
+    color: var(--color-brown-dark, #5a4a42);
+    font-size: 0.95rem;
+}
+
+.view-link {
+    font-size: 0.75rem;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.search-result-card:hover .view-link {
+    opacity: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .search-overlay-backdrop {
+        padding-top: 60px;
+        align-items: flex-start;
+    }
+
+    .search-overlay-content {
+        width: 92%;
+        margin: 0 auto;
+        border-radius: 16px;
+        padding: 16px;
+    }
+
+    .search-empty-state {
+        padding: 20px 0;
+    }
+
+    .smart-banner-content {
+        flex-direction: column-reverse;
+        /* Text on top/bottom? usually image on top is better for mobile banners, but let's keep text first for hierarchy or reverse */
+        text-align: center;
+        gap: 15px;
+    }
+
+    .smart-actions {
+        justify-content: center;
+    }
+
+    .smart-text p {
+        margin: 0 auto 16px auto;
+    }
+}

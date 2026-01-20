@@ -1,29 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiTrash2, FiPlus, FiMinus, FiArrowRight, FiShield, FiTruck, FiRefreshCw } from 'react-icons/fi';
+import { FiTrash2, FiPlus, FiMinus, FiArrowRight, FiShield, FiTruck, FiRefreshCw, FiSearch, FiX } from 'react-icons/fi';
 import './CartPage.css';
 
-const CartPage = ({ cart, updateQuantity, removeFromCart }) => {
+const CartPage = ({ cart, updateQuantity, removeFromCart, addToCart }) => {
     const navigate = useNavigate();
     const [promoCode, setPromoCode] = useState('');
 
+    // Search State
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const searchRef = useRef(null);
+
     const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const shipping = subtotal > 1000 ? 0 : 100; // Example shipping logic
+    const shipping = subtotal > 1000 ? 0 : 100;
     const total = subtotal + shipping;
 
-    // Recommendations - in a real app, these would come from an API
+    // Corrected Recommendations with Valid Images
     const recommendations = [
-        { id: 'rec1', name: 'Premium Gift Box', price: 250, image: '/images/accessories1.png' },
-        { id: 'rec2', name: 'Birthday Candle Set', price: 150, image: '/images/accessories2.png' },
-        { id: 'rec3', name: 'Handwritten Note', price: 50, image: '/images/accessories3.png' }
+        { id: 'rec1', name: 'Premium Gift Box', price: 250, image: '/images/Cake 5.png' },
+        { id: 'rec2', name: 'Birthday Candle Set', price: 150, image: '/images/Cake 3.png' },
+        { id: 'rec3', name: 'Handwritten Note', price: 50, image: '/images/Cake 2.png' }
     ];
+
+    // Mock Search Results
+    const allProducts = [
+        { id: 101, name: "Signature Chocolate Roll", price: 450, image: "/images/Cake 1.png", category: "Rolls" },
+        { id: 102, name: "Velvet Cupcake Box", price: 300, image: "/images/Cake 2.png", category: "Cupcakes" },
+        { id: 103, name: "Truffle Pastry", price: 180, image: "/images/Cake 4.png", category: "Pastries" },
+        { id: 104, name: "Fruit Tart", price: 220, image: "/images/Cake 5.png", category: "Tarts" }
+    ];
+
+    const searchResults = allProducts.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    // Close search when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setIsSearchOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const handleSearchAdd = (product) => {
+        addToCart({ ...product, quantity: 1 });
+        setIsSearchOpen(false);
+        setSearchQuery('');
+    };
 
     if (cart.length === 0) {
         return (
             <div className="cart-page-empty">
-                <div className="cart-hero-banner">
-                    <h1>This is cart</h1>
-                    <p>The search for your dream cake ends here.</p>
+                <div className="cart-hero-banner white-bg">
+                    <h1>Your Shopping Bag</h1>
+                    <p>Treat yourself to something extraordinary.</p>
                 </div>
                 <div className="empty-cart-content">
                     <div className="empty-cart-icon">🛒</div>
@@ -37,14 +71,54 @@ const CartPage = ({ cart, updateQuantity, removeFromCart }) => {
 
     return (
         <div className="cart-page-container">
-            {/* Top Banner */}
-            <div className="cart-hero-banner">
+            {/* Top Banner - White Background */}
+            <div className="cart-hero-banner white-bg">
                 <div className="banner-content">
-                    <h1>This is cart</h1>
-                    <p className="banner-subtitle">The search for your dream cake ends here.</p>
-                    <div className="cart-search-bar">
-                        <input type="text" placeholder="Search for your next favorite treat..." />
-                        <button>Search</button>
+                    <h1>Your Shopping Bag</h1>
+                    <p className="banner-subtitle">Treat yourself to something extraordinary.</p>
+
+                    {/* Search with Dropdown */}
+                    <div className="cart-search-container" ref={searchRef}>
+                        <div className="cart-search-bar">
+                            <FiSearch className="search-icon" />
+                            <input
+                                type="text"
+                                placeholder="Search for your next favorite treat..."
+                                value={searchQuery}
+                                onChange={(e) => {
+                                    setSearchQuery(e.target.value);
+                                    setIsSearchOpen(true);
+                                }}
+                                onFocus={() => setIsSearchOpen(true)}
+                            />
+                            {searchQuery && (
+                                <button className="clear-search" onClick={() => setSearchQuery('')}>
+                                    <FiX />
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Search Dropdown Overlay */}
+                        {isSearchOpen && searchQuery && (
+                            <div className="cart-search-dropdown">
+                                {searchResults.length > 0 ? (
+                                    searchResults.map(result => (
+                                        <div key={result.id} className="search-result-item">
+                                            <img src={result.image} alt={result.name} />
+                                            <div className="result-info">
+                                                <h4>{result.name}</h4>
+                                                <p>₹{result.price}</p>
+                                            </div>
+                                            <button onClick={() => handleSearchAdd(result)}>
+                                                Add <FiPlus />
+                                            </button>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="no-results">No treats found matching "{searchQuery}"</div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -75,7 +149,7 @@ const CartPage = ({ cart, updateQuantity, removeFromCart }) => {
                         {cart.map((item) => (
                             <div key={item.id} className="cart-item-card">
                                 <div className="item-image-container">
-                                    <img src={item.image} alt={item.name} />
+                                    <img src={item.image} alt={item.name} onError={(e) => { e.target.src = '/images/Cake 1.png' }} />
                                 </div>
                                 <div className="item-details">
                                     <div className="item-info-top">
@@ -115,7 +189,7 @@ const CartPage = ({ cart, updateQuantity, removeFromCart }) => {
                                         <h4>{item.name}</h4>
                                         <div className="rec-bottom">
                                             <span>₹{item.price}</span>
-                                            <button className="add-rec-btn">Add</button>
+                                            <button className="add-rec-btn" onClick={() => addToCart({ ...item, quantity: 1 })}>Add</button>
                                         </div>
                                     </div>
                                 </div>
@@ -167,12 +241,12 @@ const CartPage = ({ cart, updateQuantity, removeFromCart }) => {
                             <div className="payment-trust-section">
                                 <p>Secure Payments via</p>
                                 <div className="payment-logos">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png" alt="Paypal" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Google_Pay_Logo.svg/1200px-Google_Pay_Logo.svg.png" alt="GPay" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo.png/640px-UPI-Logo.png" alt="UPI" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" alt="Stripe" />
+                                    <img src="https://static.cdnlogo.com/logos/v/31/visa.svg" alt="Visa" />
+                                    <img src="https://static.cdnlogo.com/logos/m/17/mastercard.svg" alt="Mastercard" />
+                                    <img src="https://cdn.jsdelivr.net/gh/callback-io/allogo@main/public/logos/paypal/icon.svg" alt="Paypal" />
+                                    <img src="https://static.cdnlogo.com/logos/g/12/google-pay.svg" alt="GPay" />
+                                    <img src="https://cdn.jsdelivr.net/gh/callback-io/allogo@main/public/logos/upi/icon.svg" alt="UPI" />
+                                    <img src="https://static.cdnlogo.com/logos/s/21/stripe.svg" alt="Stripe" />
                                 </div>
                             </div>
                         </div>

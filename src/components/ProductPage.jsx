@@ -4,23 +4,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiPlus, FiMinus, FiStar, FiChevronDown, FiChevronUp, FiArrowLeft, FiZoomIn } from 'react-icons/fi';
 import './ProductPage.css';
 
-// Mock Data for the selected product
-const PRODUCT = {
-    id: 1,
-    name: "Signature Chocolate Truffle",
-    category: "Cakes",
-    price: 1200,
+import { PRODUCTS } from '../data/products';
+
+// Default detailed mock data structure to use as a template
+const PRODUCT_TEMPLATE = {
     rating: 4.9,
     reviewsCount: 128,
-    description: "Our Signature Chocolate Truffle cake is a masterpiece of decadence. Layered with rich, 70% dark chocolate ganache and moist cocoa sponge, it's finished with a silky smooth truffle glaze. Perfect for celebrations that demand the very best.",
+    description: "A masterpiece of decadence. Layered with rich flavors and finished with a silky smooth glaze. Perfect for celebrations that demand the very best.",
     flavors: [
-        { id: 'classic', name: 'Classic Dark', color: '#1a1a1a' },
-        { id: 'hazelnut', name: 'Hazelnut Praline', color: '#4a3728' },
+        { id: 'classic', name: 'Classic', color: '#1a1a1a' },
+        { id: 'hazelnut', name: 'Hazelnut', color: '#4a3728' },
         { id: 'salted-caramel', name: 'Salted Caramel', color: '#c68e17' },
-        { id: 'raspberry', name: 'Raspberry Infusion', color: '#8b0000' }
+        { id: 'raspberry', name: 'Raspberry', color: '#8b0000' }
     ],
+    // We will use the main image from the product list as the first image
     images: [
-        '/images/Cake 1.png',
+        '/images/Cake 1.png', // Fallbacks
         '/images/Cake 2.png',
         '/images/Cake 3.png',
         '/images/Cake 4.png'
@@ -36,7 +35,7 @@ const PRODUCT = {
             author: "Sarah Jenkins",
             rating: 5,
             title: "Absolutely divine!",
-            content: "The best chocolate cake I've ever had. It was so moist and the ganache was incredibly rich without being too sweet. Everyone at the party loved it!",
+            content: "The best I've ever had. It was so moist and rich without being too sweet. Everyone at the party loved it!",
             date: "January 15, 2026"
         },
         {
@@ -44,7 +43,7 @@ const PRODUCT = {
             author: "Michael Chen",
             rating: 5,
             title: "Perfect for celebrations",
-            content: "Ordered this for my wife's birthday and it was a huge hit. The packaging was also very premium. Highly recommend!",
+            content: "Ordered this for a birthday and it was a huge hit. The packaging was also very premium. Highly recommend!",
             date: "January 10, 2026"
         },
         {
@@ -52,24 +51,8 @@ const PRODUCT = {
             author: "Emma Thompson",
             rating: 5,
             title: "Texture is everything",
-            content: "The layers are so perfect. You can tell they use high-quality ingredients. The hazelnut flavor is a must-try!",
+            content: "The layers are so perfect. You can tell they use high-quality ingredients.",
             date: "January 5, 2026"
-        },
-        {
-            id: 4,
-            author: "David Wilson",
-            rating: 5,
-            title: "Top tier quality",
-            content: "Quick delivery and the cake arrived in perfect condition. The taste is exactly what you'd expect from a high-end bakery.",
-            date: "December 28, 2025"
-        },
-        {
-            id: 5,
-            author: "Lisa Rodriguez",
-            rating: 5,
-            title: "Beautiful and delicious",
-            content: "Not only does it look stunning, but it tastes even better. It was the centerpiece of our dinner party.",
-            date: "December 20, 2025"
         }
     ]
 };
@@ -77,7 +60,19 @@ const PRODUCT = {
 const ProductPage = ({ cart, addToCart, updateQuantity }) => {
     const { id } = useParams();
     const [selectedImage, setSelectedImage] = useState(0);
-    const [selectedFlavor, setSelectedFlavor] = useState(PRODUCT.flavors[0]);
+
+    // Find the product from shared data
+    const basicProduct = PRODUCTS.find(p => p.id === parseInt(id)) || PRODUCTS[0];
+
+    // Merge with template for full fields
+    const product = {
+        ...PRODUCT_TEMPLATE,
+        ...basicProduct,
+        images: [basicProduct.image, ...PRODUCT_TEMPLATE.images.slice(1)], // Use specific product image first
+        description: basicProduct.description || PRODUCT_TEMPLATE.description // Use specific desc if available
+    };
+
+    const [selectedFlavor, setSelectedFlavor] = useState(product.flavors[0]);
     const [quantity, setQuantity] = useState(1);
     const [isCommentOpen, setIsCommentOpen] = useState(false);
     const [comment, setComment] = useState("");
@@ -85,9 +80,10 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
 
     const handleAddToCart = () => {
         const productToAdd = {
-            ...PRODUCT,
+            ...product,
             selectedFlavor: selectedFlavor.name,
-            customNote: comment
+            customNote: comment,
+            quantity: quantity
         };
         // Logic to add to cart (since it's a mock, we just use the prop)
         addToCart(productToAdd);
@@ -107,8 +103,8 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
                         <div className="pdp-main-image-container" onClick={() => setIsZoomed(!isZoomed)}>
                             <motion.img
                                 key={selectedImage}
-                                src={PRODUCT.images[selectedImage]}
-                                alt={PRODUCT.name}
+                                src={product.images[selectedImage]}
+                                alt={product.name}
                                 className={`pdp-main-image ${isZoomed ? 'zoomed' : ''}`}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -117,13 +113,13 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
                             {!isZoomed && <div className="pdp-zoom-hint"><FiZoomIn /> Click to zoom</div>}
                         </div>
                         <div className="pdp-thumbnails">
-                            {PRODUCT.images.map((img, index) => (
+                            {product.images.map((img, index) => (
                                 <div
                                     key={index}
                                     className={`pdp-thumbnail ${selectedImage === index ? 'active' : ''}`}
                                     onClick={() => setSelectedImage(index)}
                                 >
-                                    <img src={img} alt={`${PRODUCT.name} view ${index + 1}`} />
+                                    <img src={img} alt={`${product.name} view ${index + 1}`} />
                                 </div>
                             ))}
                         </div>
@@ -132,28 +128,28 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
                     {/* Right side: Product Info */}
                     <div className="pdp-info-section">
                         <header className="pdp-header">
-                            <span className="pdp-category">{PRODUCT.category}</span>
-                            <h1 className="pdp-title">{PRODUCT.name}</h1>
+                            <span className="pdp-category">{product.category}</span>
+                            <h1 className="pdp-title">{product.name}</h1>
                             <div className="pdp-rating-summary">
                                 <div className="pdp-stars">
                                     {[...Array(5)].map((_, i) => (
-                                        <FiStar key={i} fill={i < Math.floor(PRODUCT.rating) ? "var(--color-accent)" : "none"} stroke="var(--color-accent)" size={16} />
+                                        <FiStar key={i} fill={i < Math.floor(product.rating) ? "var(--color-accent)" : "none"} stroke="var(--color-accent)" size={16} />
                                     ))}
                                 </div>
-                                <span className="pdp-review-count">({PRODUCT.reviewsCount} reviews)</span>
+                                <span className="pdp-review-count">({product.reviewsCount} reviews)</span>
                             </div>
-                            <p className="pdp-price">₹{PRODUCT.price.toLocaleString('en-IN')}</p>
+                            <p className="pdp-price">₹{product.price.toLocaleString('en-IN')}</p>
                         </header>
 
                         <div className="pdp-description">
-                            <p>{PRODUCT.description}</p>
+                            <p>{product.description}</p>
                         </div>
 
                         {/* Flavor Selection */}
                         <div className="pdp-selection-group">
                             <label className="pdp-label">Select Flavor: <span>{selectedFlavor.name}</span></label>
                             <div className="pdp-flavor-swatches">
-                                {PRODUCT.flavors.map((flavor) => (
+                                {product.flavors.map((flavor) => (
                                     <div
                                         key={flavor.id}
                                         className={`pdp-flavor-swatch-wrapper ${selectedFlavor.id === flavor.id ? 'active' : ''}`}
@@ -213,7 +209,7 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
                 <section className="pdp-paired-section">
                     <h2 className="pdp-section-title">Paired best with</h2>
                     <div className="pdp-recommendations-grid">
-                        {PRODUCT.pairedWith.map((item) => (
+                        {product.pairedWith.map((item) => (
                             <div key={item.id} className="pdp-paired-card">
                                 <div className="pdp-paired-img-container">
                                     <img src={item.image} alt={item.name} />
@@ -221,7 +217,9 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
                                 <div className="pdp-paired-info">
                                     <h3>{item.name}</h3>
                                     <p>₹{item.price.toLocaleString('en-IN')}</p>
-                                    <button className="pdp-paired-add-btn"><FiPlus /></button>
+                                    <button className="pdp-paired-add-btn" onClick={() => addToCart(item)}>
+                                        <FiPlus />
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -232,7 +230,7 @@ const ProductPage = ({ cart, addToCart, updateQuantity }) => {
                 <section className="pdp-reviews-section">
                     <h2 className="pdp-section-title">Guest Reviews</h2>
                     <div className="pdp-reviews-grid">
-                        {PRODUCT.reviews.map((review) => (
+                        {product.reviews.map((review) => (
                             <div key={review.id} className="pdp-review-card">
                                 <div className="pdp-review-header">
                                     <div className="pdp-review-stars">

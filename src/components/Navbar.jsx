@@ -5,16 +5,44 @@ import './Navbar.css';
 import navCake from '../assets/nav-cake.png';
 import navDessert from '../assets/nav-dessert.png';
 import CartOverlay from './CartOverlay';
+import SearchOverlay from './SearchOverlay';
 
 import navAccessories from '../assets/nav-accessories.png';
 import navCustom from '../assets/nav-custom.png';
 import navWedding from '../assets/nav-wedding.png';
 import navCorporate from '../assets/nav-corporate.png';
+import AuthOverlay from './AuthOverlay';
+import ProfileOverlay from './ProfileOverlay';
 
 const Navbar = ({ cart = [], isCartOpen, setIsCartOpen }) => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+    // Auth & Profile State
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock auth state
+
     const location = useLocation();
+
+    const handleUserClick = () => {
+        if (isLoggedIn) {
+            setIsProfileOpen(true);
+        } else {
+            setIsAuthOpen(true);
+        }
+    };
+
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+        setIsAuthOpen(false);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setIsProfileOpen(false);
+    };
 
     // Check if link is active
     const isActive = (path) => {
@@ -114,9 +142,9 @@ const Navbar = ({ cart = [], isCartOpen, setIsCartOpen }) => {
 
                     {/* Icons */}
                     <div className="navbar-icons">
-                        <FiSearch size={22} className="icon desktop-only" />
+                        <FiSearch size={22} className="icon" onClick={() => setIsSearchOpen(true)} style={{ cursor: 'pointer' }} />
                         <Link to="/shop" className="btn-order-cake desktop-only">Order Cake</Link>
-                        <FiUser size={22} className="icon desktop-only" />
+                        <FiUser size={22} className="icon desktop-only" onClick={handleUserClick} style={{ cursor: 'pointer' }} />
                         <div className="cart-icon-wrapper" onClick={() => setIsCartOpen(true)}>
                             <FiShoppingBag size={22} />
                             <span className="cart-count">{cartCount}</span>
@@ -129,6 +157,20 @@ const Navbar = ({ cart = [], isCartOpen, setIsCartOpen }) => {
                 isOpen={isCartOpen}
                 onClose={() => setIsCartOpen(false)}
                 cart={cart}
+            />
+            <SearchOverlay
+                isOpen={isSearchOpen}
+                onClose={() => setIsSearchOpen(false)}
+            />
+            <AuthOverlay
+                isOpen={isAuthOpen}
+                onClose={() => setIsAuthOpen(false)}
+                onLogin={handleLogin}
+            />
+            <ProfileOverlay
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+                onLogout={handleLogout}
             />
 
             {/* Mobile Menu Overlay */}
