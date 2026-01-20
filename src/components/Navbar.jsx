@@ -4,19 +4,25 @@ import { FiShoppingBag, FiSearch, FiMenu, FiX, FiUser } from 'react-icons/fi';
 import './Navbar.css';
 import navCake from '../assets/nav-cake.png';
 import navDessert from '../assets/nav-dessert.png';
+import CartOverlay from './CartOverlay';
 
 import navAccessories from '../assets/nav-accessories.png';
 import navCustom from '../assets/nav-custom.png';
 import navWedding from '../assets/nav-wedding.png';
 import navCorporate from '../assets/nav-corporate.png';
 
-const Navbar = ({ cart = [] }) => {
+const Navbar = ({ cart = [], isCartOpen, setIsCartOpen }) => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
 
     // Check if link is active
-    const isActive = (path) => location.pathname === path;
+    const isActive = (path) => {
+        if (path === '/shop' && location.pathname.startsWith('/product')) {
+            return true;
+        }
+        return location.pathname === path;
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -68,7 +74,7 @@ const Navbar = ({ cart = [] }) => {
                     <ul className="navbar-links">
                         <li><Link to="/" className={isActive('/') ? 'active-link' : ''}>Home</Link></li>
                         <li className="dropdown-parent">
-                            <Link to="/shop">Online Shop</Link>
+                            <Link to="/shop" className={isActive('/shop') ? 'active-link' : ''}>Online Shop</Link>
                             <div className="dropdown-menu">
                                 <Link to="/shop" className="dropdown-item">
                                     <img src={navCake} alt="Cakes" />
@@ -109,15 +115,21 @@ const Navbar = ({ cart = [] }) => {
                     {/* Icons */}
                     <div className="navbar-icons">
                         <FiSearch size={22} className="icon desktop-only" />
-                        <a href="/shop" className="btn-order-cake desktop-only">Order Cake</a>
+                        <Link to="/shop" className="btn-order-cake desktop-only">Order Cake</Link>
                         <FiUser size={22} className="icon desktop-only" />
-                        <div className="cart-icon-wrapper">
+                        <div className="cart-icon-wrapper" onClick={() => setIsCartOpen(true)}>
                             <FiShoppingBag size={22} />
                             <span className="cart-count">{cartCount}</span>
                         </div>
                     </div>
                 </div>
             </nav>
+
+            <CartOverlay
+                isOpen={isCartOpen}
+                onClose={() => setIsCartOpen(false)}
+                cart={cart}
+            />
 
             {/* Mobile Menu Overlay */}
             <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
@@ -127,17 +139,17 @@ const Navbar = ({ cart = [] }) => {
 
                 <div className="mobile-menu-content">
                     <ul className="mobile-links">
-                        <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
-                        <li><a href="/shop" onClick={() => setMobileMenuOpen(false)}>Online Shop</a></li>
-                        <li><a href="/custom-inquiry" onClick={() => setMobileMenuOpen(false)}>Services</a></li>
-                        <li><Link to="/gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</Link></li>
-                        <li><a href="/about" onClick={() => setMobileMenuOpen(false)}>About Us</a></li>
+                        <li><Link to="/" onClick={() => setMobileMenuOpen(false)} className={isActive('/') ? 'active-link' : ''}>Home</Link></li>
+                        <li><Link to="/shop" onClick={() => setMobileMenuOpen(false)} className={isActive('/shop') ? 'active-link' : ''}>Online Shop</Link></li>
+                        <li><Link to="/custom-inquiry" onClick={() => setMobileMenuOpen(false)} className={isActive('/custom-inquiry') ? 'active-link' : ''}>Services</Link></li>
+                        <li><Link to="/gallery" onClick={() => setMobileMenuOpen(false)} className={isActive('/gallery') ? 'active-link' : ''}>Gallery</Link></li>
+                        <li><Link to="/about" onClick={() => setMobileMenuOpen(false)} className={isActive('/about') ? 'active-link' : ''}>About Us</Link></li>
                     </ul>
 
                     <div className="mobile-menu-footer">
-                        <a href="/shop" className="btn-mobile-cta" onClick={() => setMobileMenuOpen(false)}>
+                        <Link to="/shop" className="btn-mobile-cta" onClick={() => setMobileMenuOpen(false)}>
                             Order Your Cake
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -4,21 +4,21 @@ import './FlavorsPage.css';
 
 // Flavor Data
 const chocolateFlavors = [
-    { name: "Chocolate raspberry/strawberry", description: "Rich chocolate paired with fresh raspberry and strawberry notes.", image: "/src/assets/nav-chocolate.png" },
-    { name: "Chocolate hazelnut", description: "Decadent chocolate with roasted hazelnut crunch.", image: "/images/hero-2.png" },
-    { name: "Chocolate coffee caramel", description: "A bold blend of chocolate, aromatic coffee, and sweet caramel.", image: "/images/hero-3.png" },
-    { name: "Chocolate orange", description: "Classic chocolate infused with zesty orange essence.", image: "/src/assets/nav-chocolate.png" },
-    { name: "Chocolate caramel", description: "Smooth chocolate with swirls of golden caramel.", image: "/images/hero-2.png" },
-    { name: "Chocolate truffle / Belgian chocolate", description: "Luxurious Belgian chocolate truffle filling.", image: "/images/header-cake-display.png" },
-    { name: "Nutties flavour", description: "A crunchy and nutty delight for chocolate lovers.", image: "/src/assets/nav-chocolate.png" },
-    { name: "Black Forest", description: "Classic combination of chocolate, cherries, and cream.", image: "/images/hero-2.png" },
-    { name: "Chocolate Mint", description: "Cool and refreshing mint swirled into dark chocolate.", image: "/images/hero-3.png" },
-    { name: "Double Chocolate", description: "Double the indulgence with dark and milk chocolate layers.", image: "/src/assets/nav-chocolate.png" }
+    { name: "Chocolate raspberry/strawberry", description: "Rich chocolate paired with fresh raspberry and strawberry notes.", image: "/images/flavors/chocolate_raspberry_grid.png" },
+    { name: "Chocolate hazelnut", description: "Decadent chocolate with roasted hazelnut crunch.", image: "/images/flavors/chocolate_hazelnut_grid.png" },
+    { name: "Chocolate coffee caramel", description: "A bold blend of chocolate, aromatic coffee, and sweet caramel.", image: "/images/flavors/chocolate_coffee_caramel_grid.png" },
+    { name: "Chocolate orange", description: "Classic chocolate infused with zesty orange essence.", image: "/images/flavors/chocolate_orange_grid.png" },
+    { name: "Chocolate caramel", description: "Smooth chocolate with swirls of golden caramel.", image: "/images/flavors/chocolate_caramel_grid.png" },
+    { name: "Chocolate truffle / Belgian chocolate", description: "Luxurious Belgian chocolate truffle filling.", image: "/images/flavors/chocolate_truffle_grid.png" },
+    { name: "Nutties flavour", description: "A crunchy and nutty delight for chocolate lovers.", image: "/images/flavors/chocolate_nutties_grid.png" },
+    { name: "Black Forest", description: "Classic combination of chocolate, cherries, and cream.", image: "/images/flavors/black_forest_grid.png" },
+    { name: "Chocolate Mint", description: "Cool and refreshing mint swirled into dark chocolate.", image: "/images/flavors/chocolate_mint_grid.png" },
+    { name: "Double Chocolate", description: "Double the indulgence with dark and milk chocolate layers.", image: "/images/flavors/double_chocolate_grid.png" }
 ];
 
 const vanillaFlavors = [
-    { name: "Vanilla chocolate", description: "Classic vanilla with a rich chocolate twist.", image: "/src/assets/nav-cake.png" },
-    { name: "Vanilla hazelnut chocolate", description: "Vanilla paired with hazelnut and chocolate.", image: "/images/hero-1.png" },
+    { name: "Vanilla chocolate", description: "Classic vanilla with a rich chocolate twist.", image: "/images/flavors/vanilla_chocolate_grid.png" },
+    { name: "Vanilla hazelnut chocolate", description: "Vanilla paired with hazelnut and chocolate.", image: "/images/flavors/vanilla_hazelnut_chocolate_grid.png" },
     { name: "Vanilla coffee caramel", description: "Creamy vanilla with coffee and caramel layers.", image: "/images/hero-2.png" },
     { name: "Vanilla blueberry/raspberry/strawberry", description: "Vanilla infused with a medley of fresh berries.", image: "/src/assets/nav-cake.png" },
     { name: "Vanilla orange", description: "Sweet vanilla with a hint of citrus orange.", image: "/images/hero-1.png" },

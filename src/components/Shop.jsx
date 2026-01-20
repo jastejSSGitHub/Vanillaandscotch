@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FiShoppingBag, FiPlus, FiMinus, FiX, FiFilter, FiTrash2 } from 'react-icons/fi';
 import './Shop.css';
 
@@ -78,7 +79,9 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
                                         className={`product-card ${quantity > 0 ? 'in-cart' : ''}`}
                                     >
                                         <div className="product-image-container">
-                                            <img src={product.image} alt={product.name} className="product-image" />
+                                            <Link to={`/product/${product.id}`}>
+                                                <img src={product.image} alt={product.name} className="product-image" />
+                                            </Link>
                                             <AnimatePresence>
                                                 {!quantity ? (
                                                     <motion.button
@@ -118,10 +121,12 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
                                                 )}
                                             </AnimatePresence>
                                         </div>
-                                        <div className="product-info">
-                                            <h3>{product.name}</h3>
-                                            <p className="product-price">₹{product.price.toLocaleString('en-IN')}</p>
-                                        </div>
+                                        <Link to={`/product/${product.id}`} className="product-info-link">
+                                            <div className="product-info">
+                                                <h3>{product.name}</h3>
+                                                <p className="product-price">₹{product.price.toLocaleString('en-IN')}</p>
+                                            </div>
+                                        </Link>
                                     </motion.div>
                                 );
                             })}

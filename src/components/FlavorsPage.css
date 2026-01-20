@@ -114,6 +114,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    text-align: center;
 }
 
 .flavor-card:hover {
@@ -152,6 +153,7 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .flavor-name {
@@ -233,13 +235,6 @@
         grid-template-columns: 1fr;
     }
 
-    .flavor-card {
-        text-align: center;
-    }
-
-    .flavor-content {
-        align-items: center;
-    }
 
     .hero-title {
         font-size: 3rem;

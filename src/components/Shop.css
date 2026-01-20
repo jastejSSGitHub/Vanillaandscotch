@@ -144,6 +144,12 @@
     color: var(--color-white);
 }
 
+.product-info-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .product-info {
     padding: 20px;
     display: flex;

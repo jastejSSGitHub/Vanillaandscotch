@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import Splash from './components/Splash';
 import Home from './components/Home';
 import Shop from './components/Shop';
+import ProductPage from './components/ProductPage';
+import CartPage from './components/CartPage';
 import FlavorsPage from './components/FlavorsPage';
 import Gallery from './components/Gallery';
 
@@ -47,6 +49,7 @@ function App() {
 
   // Cart State
   const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (product) => {
     setCart(prevCart => {
@@ -58,6 +61,8 @@ function App() {
       }
       return [...prevCart, { ...product, quantity: 1 }];
     });
+    // Open cart drawer when item is added
+    setIsCartOpen(true);
   };
 
   const removeFromCart = (productId) => {
@@ -85,7 +90,11 @@ function App() {
 
         {/* Main website content loads in the background */}
         <div>
-          <Navbar cart={cart} />
+          <Navbar
+            cart={cart}
+            isCartOpen={isCartOpen}
+            setIsCartOpen={setIsCartOpen}
+          />
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -95,6 +104,20 @@ function App() {
                   addToCart={addToCart}
                   removeFromCart={removeFromCart}
                   updateQuantity={updateQuantity}
+                />
+              } />
+              <Route path="/product/:id" element={
+                <ProductPage
+                  cart={cart}
+                  addToCart={addToCart}
+                  updateQuantity={updateQuantity}
+                />
+              } />
+              <Route path="/cart" element={
+                <CartPage
+                  cart={cart}
+                  updateQuantity={updateQuantity}
+                  removeFromCart={removeFromCart}
                 />
               } />
               <Route path="/flavors" element={<FlavorsPage />} />
