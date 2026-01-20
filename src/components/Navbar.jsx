@@ -10,7 +10,7 @@ import navCustom from '../assets/nav-custom.png';
 import navWedding from '../assets/nav-wedding.png';
 import navCorporate from '../assets/nav-corporate.png';
 
-const Navbar = () => {
+const Navbar = ({ cart = [] }) => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
@@ -25,6 +25,9 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Calculate total items
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (
         <>
@@ -62,21 +65,21 @@ const Navbar = () => {
                     <ul className="navbar-links">
                         <li><Link to="/" className={isActive('/') ? 'active-link' : ''}>Home</Link></li>
                         <li className="dropdown-parent">
-                            <a href="/shop">Online Shop</a>
+                            <Link to="/shop">Online Shop</Link>
                             <div className="dropdown-menu">
-                                <a href="/shop/cakes" className="dropdown-item">
+                                <Link to="/shop" className="dropdown-item">
                                     <img src={navCake} alt="Cakes" />
                                     <span>Cakes</span>
-                                </a>
-                                <a href="/shop/desserts" className="dropdown-item">
+                                </Link>
+                                <Link to="/shop" className="dropdown-item">
                                     <img src={navDessert} alt="Desserts" />
                                     <span>Desserts & small treats</span>
-                                </a>
+                                </Link>
 
-                                <a href="/shop/accessories" className="dropdown-item">
+                                <Link to="/shop" className="dropdown-item">
                                     <img src={navAccessories} alt="Accessories" />
                                     <span>Cake accessories</span>
-                                </a>
+                                </Link>
                             </div>
                         </li>
                         <li className="dropdown-parent">
@@ -96,8 +99,8 @@ const Navbar = () => {
                                 </a>
                             </div>
                         </li>
-                        <li><a href="/gallery">Gallery</a></li>
-                        <li><a href="/about">About</a></li>
+                        <li><Link to="/gallery">Gallery</Link></li>
+                        <li><Link to="/about">About</Link></li>
                     </ul>
 
                     {/* Icons */}
@@ -107,7 +110,7 @@ const Navbar = () => {
                         <FiUser size={22} className="icon desktop-only" />
                         <div className="cart-icon-wrapper">
                             <FiShoppingBag size={22} />
-                            <span className="cart-count">0</span>
+                            <span className="cart-count">{cartCount}</span>
                         </div>
                     </div>
                 </div>
@@ -116,8 +119,7 @@ const Navbar = () => {
             {/* Mobile Menu Overlay */}
             <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
                 <div className="mobile-menu-header">
-                    <span className="mobile-logo">Vanilla & Scotch</span>
-                    <FiX size={32} onClick={() => setMobileMenuOpen(false)} />
+                    <FiX size={32} onClick={() => setMobileMenuOpen(false)} style={{ marginLeft: 'auto' }} />
                 </div>
 
                 <div className="mobile-menu-content">
@@ -125,7 +127,7 @@ const Navbar = () => {
                         <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
                         <li><a href="/shop" onClick={() => setMobileMenuOpen(false)}>Online Shop</a></li>
                         <li><a href="/custom-inquiry" onClick={() => setMobileMenuOpen(false)}>Services</a></li>
-                        <li><a href="/gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</a></li>
+                        <li><Link to="/gallery" onClick={() => setMobileMenuOpen(false)}>Gallery</Link></li>
                         <li><a href="/about" onClick={() => setMobileMenuOpen(false)}>About Us</a></li>
                     </ul>
 

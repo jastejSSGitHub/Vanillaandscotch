@@ -27,7 +27,7 @@
 }
 
 .workshops-description {
-    font-size: 1rem;
+    font-size: 0.875rem;
     color: #666;
     line-height: 1.6;
     max-width: 500px;
@@ -117,5 +117,31 @@
 @media (max-width: 768px) {
     .workshops-title {
         font-size: 2.5rem;
+    }
+
+    .workshops-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        /* Pull the grid to the edges to counteract container padding */
+        margin-left: calc(-1 * var(--spacing-padding, 2rem));
+        margin-right: calc(-1 * var(--spacing-padding, 2rem));
+        /* Add padding inside the scroll container */
+        padding: 0 var(--spacing-padding, 2rem) 1.5rem;
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .workshops-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .workshop-card {
+        min-width: 280px;
+        flex: 0 0 85%;
+        scroll-snap-align: center;
     }
 }

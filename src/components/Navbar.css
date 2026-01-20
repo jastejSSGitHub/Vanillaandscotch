@@ -211,7 +211,8 @@
     align-items: center;
     color: var(--color-brown-dark);
     padding: 10px 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    /* Reduced from 2rem */
 }
 
 .mobile-logo {
@@ -232,17 +233,31 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.5rem;
+    /* Reduced from 2.5rem */
     text-align: center;
+    width: 100%;
+}
+
+.mobile-links li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .mobile-links a {
     text-decoration: none;
     color: var(--color-brown-dark);
-    font-size: 2.5rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    /* Reduced from 2.5rem */
+    font-weight: 500;
+    /* Slightly reduced weight */
     font-family: var(--font-serif);
     transition: all 0.3s ease;
+    display: block;
+    padding: 10px 0;
+    /* Ensures touch target size > 44px */
+    width: 100%;
 }
 
 .mobile-links a:hover {
@@ -250,7 +265,8 @@
 }
 
 .mobile-menu-footer {
-    padding: 3rem 0;
+    padding: 1.5rem 0;
+    /* Reduced from 3rem */
     display: flex;
     justify-content: center;
     width: 100%;

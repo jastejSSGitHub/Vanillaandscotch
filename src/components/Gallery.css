@@ -1,0 +1,215 @@
+/* Gallery Page Styling */
+.gallery-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #ffffff;
+    /* Explicitly white everywhere */
+    padding-top: 120px;
+    /* Navbar space */
+    padding-bottom: 60px;
+}
+
+.gallery-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.gallery-header h1 {
+    font-size: 3rem;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.gallery-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.gallery-insta-link {
+    font-size: 1rem;
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+}
+
+/* Masonry / Bento Grid */
+.masonry-grid {
+    column-count: 4;
+    column-gap: 24px;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    /* Prevent items from splitting across columns */
+    margin-bottom: 24px;
+}
+
+.gallery-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f0f0f0;
+    /* Aspect ratio is handled naturally by the image height */
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-4px);
+}
+
+.gallery-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    /* Ensure corners are rounded */
+}
+
+/* Overlay & Controls */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 20px;
+}
+
+.gallery-card:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.play-button {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background: #fff;
+}
+
+.instagram-link-btn {
+    color: #fff;
+    font-size: 32px;
+}
+
+/* Loading State */
+.loading-gallery {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Video Modal */
+.video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    /* Above navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    aspect-ratio: 9/16;
+    /* Vertical video optimize, but fits horizontal too */
+    max-height: 90vh;
+}
+
+.modal-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    border-radius: 12px;
+    outline: none;
+}
+
+.close-video-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .masonry-grid {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .masonry-grid {
+        column-count: 2;
+        column-gap: 16px;
+    }
+
+    .masonry-item {
+        margin-bottom: 16px;
+    }
+
+    .gallery-page {
+        padding-top: 100px;
+    }
+
+    .gallery-header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .masonry-grid {
+        column-count: 1;
+        /* Single column on mobile? Or 2? 2 represents Pinterest/Grid better */
+        column-count: 2;
+    }
+}

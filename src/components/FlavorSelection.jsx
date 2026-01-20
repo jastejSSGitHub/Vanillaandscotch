@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import './FlavorSelection.css'; // We'll create this
+import './FlavorSelection.css';
+import navCustom from '../assets/nav-custom.png';
 
 const FlavorSelection = () => {
     return (
@@ -19,7 +20,7 @@ const FlavorSelection = () => {
                     >
                         <div className="flavor-image-wrapper">
                             <img
-                                src="/images/header-cake-display.png"
+                                src={navCustom}
                                 alt="Signature Cake Collection"
                                 className="flavor-image"
                             />

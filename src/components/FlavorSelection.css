@@ -2,66 +2,75 @@
     position: relative;
     overflow: hidden;
     background-color: #FAF8F6;
-    padding: 4rem 0;
+    padding: 6rem 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
 }
 
 .flavor-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
+    width: 100%;
 }
 
 .flavor-content-grid {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
+    justify-content: center;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Image Container - Left Side */
 .flavor-image-container {
-    width: 25%;
-    /* Reduced significantly to give text more space */
+    width: 30%;
+    max-width: 360px;
     flex-shrink: 0;
 }
 
 .flavor-image-wrapper {
     width: 100%;
-    height: 440px;
-    /* Reduced height to match the text content height */
+    height: 520px;
     border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
     position: relative;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .flavor-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     transition: transform 1.2s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 .flavor-image-wrapper:hover .flavor-image {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 /* Text Container - Right Side */
 .flavor-text-container {
-    width: 65%;
-    /* Increased to give text and whitespace dominance */
-    flex-shrink: 1;
+    flex: 1;
+    max-width: 580px;
     text-align: left;
+    display: flex;
+    align-items: center;
 }
 
 .flavor-text-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 100%;
-    /* Removed hard limit to allow text to breathe */
+    width: 100%;
 }
 
 .flavor-subtitle {
@@ -128,54 +137,69 @@
 
 /* Mobile Responsive */
 @media (max-width: 1024px) {
+    .flavor-selection-wrap {
+        min-height: auto;
+        padding: 5rem 0;
+    }
+
     .flavor-content-grid {
-        gap: 3rem;
+        gap: 4rem;
     }
 
     .flavor-image-container {
-        width: 40%;
+        width: 35%;
+        max-width: 320px;
+    }
+
+    .flavor-image-wrapper {
+        height: 460px;
     }
 
     .flavor-text-container {
-        width: 55%;
-        padding-left: 0;
+        max-width: 500px;
     }
 
     .flavor-title {
-        font-size: 2.8rem;
+        font-size: 3rem;
+    }
+
+    .flavor-description {
+        font-size: 1.05rem;
     }
 }
 
 @media (max-width: 768px) {
     .flavor-selection-wrap {
         padding: 4rem 0;
+        min-height: auto;
     }
 
     .flavor-content-grid {
         flex-direction: column;
-        gap: 3.5rem;
+        gap: 3rem;
         text-align: center;
+        max-width: 100%;
     }
 
     .flavor-image-container {
-        width: 80%;
-        max-width: 350px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
     }
 
     .flavor-image-wrapper {
-        aspect-ratio: 1/1;
-        /* Square on mobile for better fit */
-        height: auto;
-        max-height: none;
+        height: 480px;
     }
 
     .flavor-text-container {
         width: 100%;
+        max-width: 100%;
         text-align: center;
+        justify-content: center;
+    }
+
+    .flavor-text-content {
         align-items: center;
-        display: flex;
-        flex-direction: column;
-        padding-left: 0;
     }
 
     .flavor-subtitle {
@@ -183,16 +207,41 @@
     }
 
     .flavor-title {
-        font-size: 2.4rem;
+        font-size: 2.5rem;
+        text-align: center;
     }
 
     .flavor-description {
         margin-left: auto;
         margin-right: auto;
         font-size: 1rem;
+        text-align: center;
+        max-width: 90%;
     }
 
     .flavor-cta-button {
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .flavor-selection-wrap {
+        padding: 3rem 0;
+    }
+
+    .flavor-image-container {
+        max-width: 320px;
+    }
+
+    .flavor-image-wrapper {
+        height: 400px;
+    }
+
+    .flavor-title {
+        font-size: 2rem;
+    }
+
+    .flavor-description {
+        font-size: 0.95rem;
     }
 }

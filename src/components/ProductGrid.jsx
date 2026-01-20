@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ProductGrid.css';
 
 const products = [
@@ -47,6 +47,33 @@ const products = [
 ];
 
 const ProductGrid = () => {
+    const scrollRef = useRef(null);
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        const scrollContainer = scrollRef.current;
+        if (!scrollContainer) return;
+
+        let animationFrameId;
+
+        const scroll = () => {
+            if (!isPaused) {
+                // If we've scrolled past the first set of items (half the total scroll width),
+                // reset to 0 to create seamless loop
+                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+                    scrollContainer.scrollLeft = 0;
+                } else {
+                    scrollContainer.scrollLeft += 1; // Adjust speed as needed
+                }
+            }
+            animationFrameId = requestAnimationFrame(scroll);
+        };
+
+        animationFrameId = requestAnimationFrame(scroll);
+
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [isPaused]);
+
     return (
         <section className="product-section">
             <div className="container">
@@ -56,7 +83,14 @@ const ProductGrid = () => {
                 </div>
             </div>
 
-            <div className="product-marquee-container">
+            <div
+                className="product-marquee-container"
+                ref={scrollRef}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onTouchStart={() => setIsPaused(true)}
+                onTouchEnd={() => setIsPaused(false)}
+            >
                 <div className="product-marquee-content">
                     {/* Two distinct tracks for seamless looping */}
                     <div className="product-marquee-track">

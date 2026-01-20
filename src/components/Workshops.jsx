@@ -7,7 +7,7 @@ const workshops = [
         id: 1,
         title: "The Art of Buttercream",
         date: "Feb 12 • 2:00 PM",
-        image: "https://images.unsplash.com/photo-1626803791113-437700dca441?auto=format&fit=crop&q=80&w=800",
+        image: "https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&q=80&w=800",
         level: "Beginner"
     },
     {
@@ -56,8 +56,6 @@ const Workshops = () => {
                         viewport={{ once: true }}
                     >
                         Step into our kitchen and learn the secrets behind the swirl.
-                        From perfecting the French macaron to decorating your first celebration cake,
-                        our hands-on workshops are designed to inspire joy in baking.
                     </motion.p>
                 </div>
 
