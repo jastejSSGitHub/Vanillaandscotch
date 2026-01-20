@@ -17,6 +17,7 @@ const slides = [
     {
         id: 2,
         image: "/images/big-image-4.png",
+        video: "/videos/cake-video2.mp4",
         category: "Fresh Cream Cakes",
         badgeColor: "#FFF3E0", // Light Orange/Cream
         textColor: "#E65100", // Dark Orange
@@ -27,6 +28,7 @@ const slides = [
     {
         id: 3,
         image: "/images/big-image-3.png",
+        video: "/videos/cake3-video.mp4",
         category: "Artisan Cakes",
         badgeColor: "#EFEBE9", // Light Brown
         textColor: "#4E342E", // Dark Brown

@@ -11,14 +11,14 @@ import accessoriesImg from '../assets/nav-accessories.png';
 
 // Mock Data
 const PRODUCTS = [
-    { id: 1, name: "Signature Chocolate Truffle", category: "Cakes", price: 65.00, image: cakeImg, description: "Decadent layers of dark chocolate ganache." },
-    { id: 2, name: "Vanilla Bean Dream", category: "Cakes", price: 55.00, image: cakeImg, description: "Light and airy vanilla sponge with buttercream." },
-    { id: 3, name: "Red Velvet Elegance", category: "Cakes", price: 60.00, image: cakeImg, description: "Classic red velvet with cream cheese frosting." },
-    { id: 4, name: "Lemon Meringue Delight", category: "Cakes", price: 58.00, image: cakeImg, description: "Zesty lemon curd filled cake." },
-    { id: 5, name: "Assorted Macaron Box", category: "Desserts", price: 35.00, image: dessertImg, description: "12-piece box of premium macarons." },
-    { id: 6, name: "Artisan Brownies", category: "Desserts", price: 28.00, image: dessertImg, description: "Fudgy, rich chocolate brownies." },
-    { id: 7, name: "Gold Cake Server", category: "Accessories", price: 45.00, image: accessoriesImg, description: "Elegant gold-plated serving set." },
-    { id: 8, name: "Celebration Candles", category: "Accessories", price: 12.00, image: accessoriesImg, description: "Luxury long-burning candles." },
+    { id: 1, name: "Signature Chocolate Truffle", category: "Cakes", price: 1200, image: cakeImg, description: "Decadent layers of dark chocolate ganache." },
+    { id: 2, name: "Vanilla Bean Dream", category: "Cakes", price: 950, image: cakeImg, description: "Light and airy vanilla sponge with buttercream." },
+    { id: 3, name: "Red Velvet Elegance", category: "Cakes", price: 1100, image: cakeImg, description: "Classic red velvet with cream cheese frosting." },
+    { id: 4, name: "Lemon Meringue Delight", category: "Cakes", price: 1050, image: cakeImg, description: "Zesty lemon curd filled cake." },
+    { id: 5, name: "Assorted Macaron Box", category: "Desserts", price: 850, image: dessertImg, description: "12-piece box of premium macarons." },
+    { id: 6, name: "Artisan Brownies", category: "Desserts", price: 650, image: dessertImg, description: "Fudgy, rich chocolate brownies." },
+    { id: 7, name: "Gold Cake Server", category: "Accessories", price: 1500, image: accessoriesImg, description: "Elegant gold-plated serving set." },
+    { id: 8, name: "Celebration Candles", category: "Accessories", price: 450, image: accessoriesImg, description: "Luxury long-burning candles." },
 ];
 
 const CATEGORIES = ["All", "Cakes", "Desserts", "Accessories"];
@@ -79,34 +79,48 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
                                     >
                                         <div className="product-image-container">
                                             <img src={product.image} alt={product.name} className="product-image" />
-                                            {/* Quick add only if not in cart */}
-                                            {!quantity && (
-                                                <button className="btn-add-quick" onClick={() => addToCart(product)}>
-                                                    <FiPlus />
-                                                </button>
-                                            )}
+                                            <AnimatePresence>
+                                                {!quantity ? (
+                                                    <motion.button
+                                                        key="add-btn"
+                                                        initial={{ opacity: 0, scale: 0.8 }}
+                                                        animate={{ opacity: 1, scale: 1 }}
+                                                        exit={{ opacity: 0, scale: 0.8 }}
+                                                        className="btn-add-quick"
+                                                        onClick={() => addToCart(product)}
+                                                        layoutId={`action-${product.id}`}
+                                                    >
+                                                        <FiPlus />
+                                                    </motion.button>
+                                                ) : (
+                                                    <motion.div
+                                                        key="controls"
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        exit={{ opacity: 0 }}
+                                                        className="product-card-controls overlay"
+                                                        layoutId={`action-${product.id}`}
+                                                    >
+                                                        <button
+                                                            className="qty-btn delete"
+                                                            onClick={() => quantity === 1 ? removeFromCart(product.id) : updateQuantity(product.id, -1)}
+                                                        >
+                                                            {quantity === 1 ? <FiTrash2 size={16} /> : <FiMinus size={16} />}
+                                                        </button>
+                                                        <span className="qty-count">{quantity}</span>
+                                                        <button
+                                                            className="qty-btn add"
+                                                            onClick={() => updateQuantity(product.id, 1)}
+                                                        >
+                                                            <FiPlus size={16} />
+                                                        </button>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                         <div className="product-info">
                                             <h3>{product.name}</h3>
-                                            <p className="product-price">${product.price.toFixed(2)}</p>
-
-                                            {quantity > 0 && (
-                                                <div className="product-card-controls">
-                                                    <button
-                                                        className="qty-btn delete"
-                                                        onClick={() => quantity === 1 ? removeFromCart(product.id) : updateQuantity(product.id, -1)}
-                                                    >
-                                                        {quantity === 1 ? <FiTrash2 size={16} /> : <FiMinus size={16} />}
-                                                    </button>
-                                                    <span className="qty-count">{quantity}</span>
-                                                    <button
-                                                        className="qty-btn add"
-                                                        onClick={() => updateQuantity(product.id, 1)}
-                                                    >
-                                                        <FiPlus size={16} />
-                                                    </button>
-                                                </div>
-                                            )}
+                                            <p className="product-price">₹{product.price.toLocaleString('en-IN')}</p>
                                         </div>
                                     </motion.div>
                                 );
@@ -147,7 +161,7 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
                                             <img src={item.image} alt={item.name} className="cart-item-img" />
                                             <div className="cart-item-details">
                                                 <h4>{item.name}</h4>
-                                                <p>${item.price.toFixed(2)}</p>
+                                                <p>₹{item.price.toLocaleString('en-IN')}</p>
                                                 <div className="quantity-controls">
                                                     <button onClick={() => updateQuantity(item.id, -1)}><FiMinus size={12} /></button>
                                                     <span>{item.quantity}</span>
@@ -166,7 +180,7 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
                                 <div className="cart-footer">
                                     <div className="cart-total">
                                         <span>Total</span>
-                                        <span>${cartTotal.toFixed(2)}</span>
+                                        <span>₹{cartTotal.toLocaleString('en-IN')}</span>
                                     </div>
                                     <button className="btn-checkout">
                                         Proceed to Checkout

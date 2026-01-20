@@ -20,7 +20,8 @@
 
 /* Header & Filter */
 .shop-header {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
 .shop-title {
@@ -38,7 +39,7 @@
 .filter-bar {
     margin-bottom: 3rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -132,12 +133,11 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.3s ease;
+    z-index: 10;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-
 
 .btn-add-quick:hover {
     background-color: var(--color-brown-dark);
@@ -149,6 +149,8 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    min-height: 100px;
+    /* Ensure consistent height */
 }
 
 .product-info h3 {
@@ -160,10 +162,12 @@
 }
 
 .product-price {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    color: var(--color-secondary);
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-brown-dark);
     margin-bottom: 16px;
+    letter-spacing: -0.01em;
 }
 
 .btn-add-to-cart {
@@ -183,20 +187,23 @@
     color: var(--color-white);
 }
 
-/* Product Card - Quantity Controls (Active State) */
-.product-card-controls {
+/* Product Card - Quantity Controls (Active State as Overlay) */
+.product-card-controls.overlay {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: var(--color-brown-dark);
-    border-radius: 8px;
-    padding: 6px;
-    margin-top: auto;
-    width: 100%;
-    height: 44px;
-    /* Match button height approx */
+    border-radius: 20px;
+    /* More rounded to morph from circle */
+    padding: 4px;
+    width: 120px;
+    height: 40px;
     box-shadow: 0 4px 12px rgba(90, 74, 66, 0.2);
-    animation: fadeIn 0.2s ease-out;
+    z-index: 10;
+    overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -512,6 +519,12 @@
 @media (max-width: 1200px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
     }
 }
 

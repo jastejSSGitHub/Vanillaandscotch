@@ -173,9 +173,9 @@
 
 .price {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: #86868b;
-    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--color-brown-dark);
+    font-weight: 700;
 }
 
 @keyframes scroll {
