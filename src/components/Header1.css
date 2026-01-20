@@ -25,7 +25,8 @@
 }
 
 /* Full screen background image */
-.hero-image {
+.hero-image,
+.hero-video {
     position: absolute;
     top: -5%;
     left: -5%;
@@ -36,6 +37,7 @@
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
+    object-fit: cover;
 }
 
 /* Added overlay for readability */

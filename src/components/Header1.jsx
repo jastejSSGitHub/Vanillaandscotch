@@ -6,6 +6,7 @@ const slides = [
     {
         id: 1,
         image: "/images/big-image-1.png",
+        video: "/videos/cake1-video.mp4",
         category: "Signature Cakes",
         badgeColor: "#FFEBEE", // Light Red
         textColor: "#B71C1C", // Dark Red
@@ -15,7 +16,7 @@ const slides = [
     },
     {
         id: 2,
-        image: "/images/big-image-2.png",
+        image: "/images/big-image-4.png",
         category: "Fresh Cream Cakes",
         badgeColor: "#FFF3E0", // Light Orange/Cream
         textColor: "#E65100", // Dark Orange
@@ -86,17 +87,33 @@ const Header1 = () => {
                     }}
                     className="hero-slide"
                 >
-                    <motion.div
-                        className="hero-image"
-                        style={{
-                            backgroundImage: `url(${slides[current].image})`,
-                        }}
-                        animate={{
-                            x: mousePos.x,
-                            y: mousePos.y,
-                        }}
-                        transition={{ type: "tween", ease: "linear", duration: 0.2 }}
-                    />
+                    {slides[current].video ? (
+                        <motion.video
+                            className="hero-video"
+                            src={slides[current].video}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            animate={{
+                                x: mousePos.x,
+                                y: mousePos.y,
+                            }}
+                            transition={{ type: "tween", ease: "linear", duration: 0.2 }}
+                        />
+                    ) : (
+                        <motion.div
+                            className="hero-image"
+                            style={{
+                                backgroundImage: `url(${slides[current].image})`,
+                            }}
+                            animate={{
+                                x: mousePos.x,
+                                y: mousePos.y,
+                            }}
+                            transition={{ type: "tween", ease: "linear", duration: 0.2 }}
+                        />
+                    )}
                     <div className="hero-overlay"></div>
 
                     <div className="hero-content">

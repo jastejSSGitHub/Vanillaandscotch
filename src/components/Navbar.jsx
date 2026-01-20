@@ -58,7 +58,10 @@ const Navbar = ({ cart = [] }) => {
 
                     {/* Logo */}
                     <div className="navbar-logo">
-                        <Link to="/">Vanilla & Scotch</Link>
+                        <Link to="/">
+                            <img src="/images/Logo.png" alt="Vanilla & Scotch Logo" className="nav-logo-img" />
+                            <span>Vanilla & Scotch</span>
+                        </Link>
                     </div>
 
                     {/* Desktop Navigation */}
