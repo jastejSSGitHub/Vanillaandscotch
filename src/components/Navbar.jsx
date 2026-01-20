@@ -49,6 +49,9 @@ const Navbar = ({ cart = [], isCartOpen, setIsCartOpen }) => {
         if (path === '/shop' && location.pathname.startsWith('/product')) {
             return true;
         }
+        if (path === '/services' && location.pathname.startsWith('/services')) {
+            return true;
+        }
         return location.pathname === path;
     };
 
@@ -120,20 +123,20 @@ const Navbar = ({ cart = [], isCartOpen, setIsCartOpen }) => {
                             </div>
                         </li>
                         <li className="dropdown-parent">
-                            <span className="nav-link-span" style={{ cursor: 'pointer' }}>Services</span>
+                            <span className={`nav-link-span ${isActive('/services') ? 'active-link' : ''}`} style={{ cursor: 'pointer' }}>Services</span>
                             <div className="dropdown-menu">
-                                <a href="/custom-inquiry" className="dropdown-item">
+                                <Link to="/services?tab=custom" className="dropdown-item">
                                     <img src={navCustom} alt="Custom Inquiry" />
                                     <span>Custom Inquiry</span>
-                                </a>
-                                <a href="/wedding" className="dropdown-item">
+                                </Link>
+                                <Link to="/services?tab=wedding" className="dropdown-item">
                                     <img src={navWedding} alt="Wedding" />
                                     <span>Wedding</span>
-                                </a>
-                                <a href="/corporate" className="dropdown-item">
+                                </Link>
+                                <Link to="/services?tab=corporate" className="dropdown-item">
                                     <img src={navCorporate} alt="Corporate" />
                                     <span>Corporate</span>
-                                </a>
+                                </Link>
                             </div>
                         </li>
                         <li><Link to="/gallery">Gallery</Link></li>

@@ -77,7 +77,7 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
                                                         className="btn-add-quick"
-                                                        onClick={() => addToCart(product)}
+                                                        onClick={() => addToCart(product, false)}
                                                         layoutId={`action-${product.id}`}
                                                     >
                                                         <FiPlus />

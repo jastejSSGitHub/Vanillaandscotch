@@ -1,0 +1,280 @@
+.services-page {
+    padding: 120px 20px 60px;
+    /* Top padding to clear navbar */
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.services-header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: #2c2c2c;
+}
+
+.services-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Segmented Control / Tabs */
+.segmented-control {
+    display: inline-flex;
+    background: #f0f0f0;
+    padding: 5px;
+    border-radius: 50px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.segment-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 45px;
+    color: #666;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.segment-btn.active {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.services-content-wrapper {
+    min-height: 400px;
+    margin-bottom: 80px;
+}
+
+/* Sections */
+.service-section {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.service-intro,
+.service-details {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.service-details.reversed {
+    flex-direction: row-reverse;
+}
+
+.service-text {
+    flex: 1;
+}
+
+.service-text.centered {
+    text-align: center;
+}
+
+.service-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
+
+.service-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
+
+.passion-text {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #888;
+    margin-bottom: 20px;
+    border-left: 3px solid #e0e0e0;
+    padding-left: 15px;
+}
+
+.description {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.service-image-container {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-image-container img,
+.detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.service-image-container:hover img {
+    transform: scale(1.05);
+}
+
+.service-image-container.small-feature {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.detail-image {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Bento Grid for Wedding */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.bento-item {
+    border-radius: 15px;
+    overflow: hidden;
+    height: 250px;
+    position: relative;
+}
+
+.bento-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.bento-item:hover img {
+    transform: scale(1.05);
+}
+
+.bento-item.large {
+    grid-column: span 2;
+    grid-row: span 2;
+    height: 520px;
+}
+
+.bento-item.wide {
+    grid-column: span 2;
+}
+
+/* Form */
+.services-footer-form {
+    margin-top: 60px;
+    background: #fafafa;
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.inquiry-form-container h3 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.inquiry-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.form-group {
+    flex: 1 1 45%;
+}
+
+.form-group.full-width {
+    flex: 1 1 100%;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #fff;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #000;
+}
+
+.checkbox-group {
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin: 20px auto 0;
+    display: block;
+}
+
+.submit-btn:hover {
+    background: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .service-intro,
+    .service-details,
+    .service-details.reversed {
+        flex-direction: column;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-item.large,
+    .bento-item.wide {
+        grid-column: span 1;
+        grid-row: span 1;
+        height: 300px;
+    }
+
+    .form-group {
+        flex-basis: 100%;
+    }
+}

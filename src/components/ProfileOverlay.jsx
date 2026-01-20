@@ -51,15 +51,15 @@ const ProfileOverlay = ({ isOpen, onClose, onLogout }) => {
                     />
                     <motion.div
                         className="profile-modal"
-                        initial={{ x: '100%' }}
-                        animate={{ x: 0 }}
-                        exit={{ x: '100%' }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        transition={{ type: "spring", stiffness: 350, damping: 25 }}
                     >
                         <div className="profile-header">
                             <h2>Profile</h2>
                             <button className="profile-close-btn" onClick={onClose}>
-                                <FiX size={24} />
+                                <FiX size={18} />
                             </button>
                         </div>
 

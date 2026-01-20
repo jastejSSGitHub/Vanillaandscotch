@@ -10,6 +10,8 @@ import ProductPage from './components/ProductPage';
 import CartPage from './components/CartPage';
 import FlavorsPage from './components/FlavorsPage';
 import Gallery from './components/Gallery';
+import AboutPage from './components/AboutPage';
+import ServicesPage from './components/ServicesPage';
 
 // ScrollToTop component to handle scrolling on route change
 const ScrollToTop = () => {
@@ -51,7 +53,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const addToCart = (product) => {
+  const addToCart = (product, shouldOpenCart = true) => {
     const quantityToAdd = product.quantity || 1;
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === product.id);
@@ -62,8 +64,10 @@ function App() {
       }
       return [...prevCart, { ...product, quantity: quantityToAdd }];
     });
-    // Open cart drawer when item is added
-    setIsCartOpen(true);
+    // Open cart drawer when item is added only if requested
+    if (shouldOpenCart) {
+      setIsCartOpen(true);
+    }
   };
 
   const removeFromCart = (productId) => {
@@ -124,6 +128,8 @@ function App() {
               } />
               <Route path="/flavors" element={<FlavorsPage />} />
               <Route path="/gallery" element={<Gallery />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
             </Routes>
           </main>
           <Footer />
