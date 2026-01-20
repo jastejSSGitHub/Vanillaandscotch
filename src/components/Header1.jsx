@@ -6,7 +6,7 @@ const slides = [
     {
         id: 1,
         image: "/images/big-image-1.png",
-        video: "/videos/cake1-video.mp4",
+        video: "/videos/cake-1-upscaled.mp4",
         category: "Signature Cakes",
         badgeColor: "#FFEBEE", // Light Red
         textColor: "#B71C1C", // Dark Red
@@ -76,7 +76,7 @@ const Header1 = () => {
 
     return (
         <div className="hero-container" onMouseMove={handleMouseMove}>
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
                 <motion.div
                     key={current}
                     variants={slideVariants}
