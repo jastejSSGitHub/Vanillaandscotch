@@ -33,16 +33,6 @@ const slides = [
         subtitle: "The ultimate comfort food, elevated.",
         cta: "Shop Specialty",
     },
-    {
-        id: 4,
-        image: "/images/big-image-4.png?v=2",
-        category: "Themed Cakes",
-        badgeColor: "#FFF8E1", // Light Yellow
-        textColor: "#F57F17", // Dark Yellow
-        title: "Tiny Treats, Big Flavor",
-        subtitle: "Perfect detailed designs for every occasion.",
-        cta: "View Gallery",
-    },
 ];
 
 const Header1 = () => {

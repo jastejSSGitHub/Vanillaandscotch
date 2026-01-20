@@ -230,7 +230,15 @@
     }
 
     .flavors-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+    }
+
+    .flavor-card {
+        text-align: center;
+    }
+
+    .flavor-content {
+        align-items: center;
     }
 
     .hero-title {
