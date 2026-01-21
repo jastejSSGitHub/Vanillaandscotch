@@ -24,28 +24,29 @@ const Shop = ({ cart, addToCart, removeFromCart, updateQuantity }) => {
     return (
         <div className="shop-page">
             <div className="shop-container">
+                {/* Header - spans full width */}
+                <header className="shop-header">
+                    <h1 className="shop-title">Online Shop</h1>
+                    <p className="shop-subtitle">Curated confections for every occasion.</p>
+                </header>
+
+                {/* Filter Chips - spans full width */}
+                <div className="filter-bar">
+                    <div className="filter-chips">
+                        {CATEGORIES.map(category => (
+                            <button
+                                key={category}
+                                className={`filter-chip ${activeCategory === category ? 'active' : ''}`}
+                                onClick={() => setActiveCategory(category)}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
                 {/* Main Content Area */}
                 <div className="shop-main">
-                    <header className="shop-header">
-                        <h1 className="shop-title">Online Shop</h1>
-                        <p className="shop-subtitle">Curated confections for every occasion.</p>
-                    </header>
-
-                    {/* Filter Chips */}
-                    <div className="filter-bar">
-                        <div className="filter-chips">
-                            {CATEGORIES.map(category => (
-                                <button
-                                    key={category}
-                                    className={`filter-chip ${activeCategory === category ? 'active' : ''}`}
-                                    onClick={() => setActiveCategory(category)}
-                                >
-                                    {category}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
                     {/* Product Grid */}
                     <motion.div
                         className="product-grid"

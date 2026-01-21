@@ -22,6 +22,8 @@
 .shop-header {
     margin-bottom: 3rem;
     text-align: center;
+    grid-column: 1 / -1;
+    /* Span across both columns on desktop */
 }
 
 .shop-title {
@@ -41,6 +43,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    grid-column: 1 / -1;
+    /* Span across both columns on desktop */
 }
 
 .filter-chips {
@@ -530,6 +534,12 @@
 
     .shop-sidebar {
         display: none;
+    }
+
+    .shop-header,
+    .filter-bar {
+        grid-column: 1;
+        /* Reset to single column on mobile */
     }
 
     /* When mobile open class is applied, it overrides display: none via the specificity above or explicit rule */
